@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use App\Models\Roles;
+use App\Models\Role;
 
 class RolesTableSeeder extends Seeder
 {
@@ -16,10 +16,10 @@ class RolesTableSeeder extends Seeder
      */
     public function run()
     {
-        $role = new Roles();
+        $role = new Role();
         $role->rol = 'admin';
         $role->save();
-        $role = new Roles();
+        $role = new Role();
         $role->rol = 'user';
         $role->save();
     }

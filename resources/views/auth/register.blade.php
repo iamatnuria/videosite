@@ -41,6 +41,18 @@
                         </div>
 
                         <div class="form-group row">
+
+                                <label for="rol_id" class=" col-md-4 col-form-label text-md-right">Rol:</label>
+                            <div class="col-md-6">
+                                <select class="form-select" name="rol_id" id="rol_id">
+                                    <option value="2">User</option>
+                                    <option value="3">Editor</option>
+                                    <option value="1">Admin</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
                             <div class="col-md-6">

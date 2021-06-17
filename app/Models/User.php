@@ -2,11 +2,11 @@
 
 namespace App\Models;
 
+
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use App\Models\Roles;
 
 class User extends Authenticatable
 {
@@ -46,15 +46,13 @@ class User extends Authenticatable
 
     public function roles()
     {
-        return $this
-            ->belongsToMany('App\Models\Roles')
-            ->withTimestamps();
+        return $this->hasOne(Role::class);
     }
 
     public function videos()
     {
         return $this
-            ->belongsToMany('App\Models\Videos')
+            ->belongsToMany(Video::class)
             ->withPivot('video_id');
     }
 

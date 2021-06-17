@@ -6,7 +6,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
-use App\Models\Roles;
+use App\Models\Role;
 
 class UserTableSeeder extends Seeder
 {
@@ -18,8 +18,8 @@ class UserTableSeeder extends Seeder
     public function run()
     {
 
-        $role_user = Roles::where('rol', 'user')->first();
-        $role_admin = Roles::where('rol', 'admin')->first();
+        $role_user = Role::where('rol', 'user')->first();
+        $role_admin = Role::where('rol', 'admin')->first();
         //dd($role_admin);
 
         $user = new User();
