@@ -62,39 +62,7 @@
                                     </li>
                                 @endif
                             @else
-                            @auth
-                                    <li class="nav-item">
-                                        <a class="nav-link text-white" href="{{ route('all') }}">
-                                            {{ __('Videos') }}
-                                        </a>
-                                    </li>
-                                    <li class="nav-item dropdown">
-                                        <a id="navbarDropdown" class="nav-link dropdown-toggle text-white" href="#" role="button"
-                                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
-                                            {{ Auth::user()->name }}
-                                        </a>
 
-
-
-                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-
-                                            <a class="dropdown-item" href="{{route('profile')}}">
-                                                {{ __('Perfil') }}
-                                            </a>
-
-                                            <a class="dropdown-item" href="{{ route('logout') }}">
-                                                {{ __('Logout') }}
-                                            </a>
-                                        </div>
-                                    </li>
-
-                                    <li class="nav-item ml-4">
-                                        <form class="nav-link" method="POST" action="/logout">
-                                            @csrf
-                                            <button class="text-dark btn btn-light">Logout</button>
-                                        </form>
-                                    </li>
-                            @endauth
                                 @if (Auth::user()->hasRole('admin'))
                                     <li class="nav-item dropdown">
                                         <a id="navbarDropdown" class="nav-link text-white dropdown-toggle" href="#" role="button"
@@ -142,6 +110,16 @@
                                 @endif
 
                             @endguest
+
+                            @auth
+
+                                <li class="nav-item ml-4">
+                                    <form class="nav-link" method="POST" action="/logout">
+                                        @csrf
+                                        <button class="text-dark btn btn-light">Logout</button>
+                                    </form>
+                                </li>
+                            @endauth
 
 
                         </ul>
