@@ -5,7 +5,7 @@
         <div class="col-sm-8">
             <div class="w-75">
                 <video width="100%" controls>
-                    <source src="{{ asset('storage/' . $videos->cont) }}" type="video/mp4">
+                    <source src="{{ asset('').$videos->cont}}" type="video/mp4">
                     Your browser does not support HTML video.
                 </video>
                 <br>
