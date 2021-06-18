@@ -11,7 +11,7 @@
                     <a class="text-decoration-none text-dark" href="{{ route('video.show', $video->id) }}"><h4
                             class="card-title">{{ $video->title }}</h4></a>
                     <video width="100%">
-                        <source src="{{ 'storage/' . $video->cont }}" type="video/mp4">
+                        <source src="{{ 'public/storage' . $video->cont }}" type="video/mp4">
                         Your browser does not support HTML video.
                     </video>
                     <br>
