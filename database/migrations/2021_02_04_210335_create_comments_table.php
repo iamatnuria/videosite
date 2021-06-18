@@ -4,8 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCommentsTable extends Migration
-{
+class CreateCommentsTable extends Migration {
+
     /**
      * Run the migrations.
      *
@@ -15,9 +15,9 @@ class CreateCommentsTable extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
-		    $table->string('comment', 255);
-		    $table->unsignedBigInteger('user');
-		    $table->unsignedBigInteger('idVideo');
+            $table->string('comment', 255);
+            $table->unsignedBigInteger('user');
+            $table->unsignedBigInteger('idVideo');
 
             $table->timestamps();
 

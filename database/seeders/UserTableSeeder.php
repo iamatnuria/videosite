@@ -8,8 +8,8 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\Role;
 
-class UserTableSeeder extends Seeder
-{
+class UserTableSeeder extends Seeder {
+
     /**
      * Run the database seeds.
      *

@@ -4,8 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRolesUserTable extends Migration
-{
+class CreateRolesUserTable extends Migration {
+
     /**
      * Run the migrations.
      *
@@ -15,7 +15,7 @@ class CreateRolesUserTable extends Migration
     {
         Schema::create('roles_user', function (Blueprint $table) {
             $table->unsignedBigInteger('user_id');
-		    $table->unsignedBigInteger('role_id');
+            $table->unsignedBigInteger('role_id');
             $table->timestamps();
             $table->foreign('user_id')
                 ->references('id')

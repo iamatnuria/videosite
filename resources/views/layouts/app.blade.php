@@ -25,72 +25,72 @@
 </head>
 
 <body class=" bg-light">
-    <div id="app">
-        <nav style="position: fixed; z-index: 5;"
-            class="w-100 navbar navbar-expand-md navbar-light bg-dark shadow-sm rounded-0 d-flex">
-            <div class="container-lg d-flex justify-content-between align-items-center">
-                <div class="align-self-start">
-                    <a class="navbar-brand text-white" href="{{ url('/') }}">
-                        {{ config('app.name', 'Videosite') }}
-                    </a>
-                </div>
-                <div class="">
-                    <button class="navbar-toggler" type="button" data-toggle="collapse"
+<div id="app">
+    <nav style="position: fixed; z-index: 5;"
+         class="w-100 navbar navbar-expand-md navbar-light bg-dark shadow-sm rounded-0 d-flex">
+        <div class="container-lg d-flex justify-content-between align-items-center">
+            <div class="align-self-start">
+                <a class="navbar-brand text-white" href="{{ url('/') }}">
+                    {{ config('app.name', 'Videosite') }}
+                </a>
+            </div>
+            <div class="">
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
                         data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <!-- Left Side Of Navbar -->
-                        <ul class="navbar-nav mr-auto">
-                        </ul>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <!-- Left Side Of Navbar -->
+                    <ul class="navbar-nav mr-auto">
+                    </ul>
 
-                        <!-- Right Side Of Navbar -->
-                        <ul class="navbar-nav ml-auto">
-                            <!-- Authentication Links -->
-                            @guest
-                                @if (Route::has('login'))
-                                    <li class="nav-item">
-                                        <a class="nav-link text-white" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                    </li>
-                                @endif
+                    <!-- Right Side Of Navbar -->
+                    <ul class="navbar-nav ml-auto">
+                        <!-- Authentication Links -->
+                        @guest
+                            @if (Route::has('login'))
+                                <li class="nav-item">
+                                    <a class="nav-link text-white" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                </li>
+                            @endif
 
-                                @if (Route::has('register'))
-                                    <li class="nav-item">
-                                        <a class="nav-link text-white" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                    </li>
-                                @endif
-                            @else
+                            @if (Route::has('register'))
+                                <li class="nav-item">
+                                    <a class="nav-link text-white"
+                                       href="{{ route('register') }}">{{ __('Register') }}</a>
+                                </li>
+                            @endif
+                        @else
 
-                                @if (Auth::user()->hasRole('admin'))
-                                    <li class="nav-item dropdown">
-                                        <a id="navbarDropdown" class="nav-link text-white dropdown-toggle" href="#" role="button"
-                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            {{ Auth::user()->name }}
-                                        </a>
-
-                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                            <a class="dropdown-item text-dark" href="{{ route('logout') }}">
-                                                {{ __('Logout') }}
-                                            </a>
-                                            <a class="dropdown-item text-dark" href="{{ route('all') }}">
-                                                {{ __('Todos') }}
-                                            </a>
-                                            <a class="dropdown-item text-dark" href="{{ route('edit') }}">
-                                                {{ __('Administrar') }}
-                                            </a>
-                                        </div>
-                                    </li>
-                                @endif
-
-                                @if (Auth::user()->hasRole('user') || Auth::user()->hasRole('editor'))
-                                        <li class="nav-item mr-4">
-                                            <a class="nav-link text-white" href="{{ route('all') }}">{{ __('Videos') }}</a>
-                                        </li>
+                            @if (Auth::user()->hasRole('admin'))
+                                <li class="nav-item mr-4">
+                                    <a class="nav-link text-white" href="{{ route('all') }}">{{ __('Videos') }}</a>
+                                </li>
                                 <li class="nav-item dropdown">
-                                    <a id="navbarDropdown" class="nav-link dropdown-toggle text-white" href="#" role="button"
-                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                                    <a id="navbarDropdown" class="nav-link text-white dropdown-toggle" href="#"
+                                       role="button"
+                                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        {{ Auth::user()->name }}
+                                    </a>
+
+                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item text-dark" href="{{ route('edit') }}">
+                                            {{ __('Administrar') }}
+                                        </a>
+                                    </div>
+                                </li>
+                            @endif
+
+                            @if (Auth::user()->hasRole('user') || Auth::user()->hasRole('editor'))
+                                <li class="nav-item mr-4">
+                                    <a class="nav-link text-white" href="{{ route('all') }}">{{ __('Videos') }}</a>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a id="navbarDropdown" class="nav-link dropdown-toggle text-white" href="#"
+                                       role="button"
+                                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         {{ Auth::user()->name }}
                                     </a>
 
@@ -107,32 +107,32 @@
 
                                     </div>
                                 </li>
-                                @endif
+                            @endif
 
-                            @endguest
+                        @endguest
 
-                            @auth
+                        @auth
 
-                                <li class="nav-item ml-4">
-                                    <form class="nav-link" method="POST" action="/logout">
-                                        @csrf
-                                        <button class="text-dark btn btn-light">Logout</button>
-                                    </form>
-                                </li>
-                            @endauth
+                            <li class="nav-item ml-4">
+                                <form class="nav-link" method="POST" action="/logout">
+                                    @csrf
+                                    <button class="text-dark btn btn-light">Logout</button>
+                                </form>
+                            </li>
+                        @endauth
 
 
-                        </ul>
-                    </div>
+                    </ul>
                 </div>
             </div>
-        </nav>
-        <main class="py-4">
-            <div style="margin-top: 75px;">
-                @yield('content')
-            </div>
-        </main>
-    </div>
+        </div>
+    </nav>
+    <main class="py-4">
+        <div style="margin-top: 75px;">
+            @yield('content')
+        </div>
+    </main>
+</div>
 </body>
 
 </html>

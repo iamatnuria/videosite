@@ -8,8 +8,8 @@ use App\Models\Comments;
 use App\Models\Video;
 use DateTime;
 
-class CommentController extends Controller
-{
+class CommentController extends Controller {
+
     /**
      * Display a listing of the resource.
      *
@@ -33,7 +33,8 @@ class CommentController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -44,21 +45,24 @@ class CommentController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        $videos=Video::FindOrFail($id);
-        $allVid=Video::whereNotIn('id', [$id])->get();
-        $comments = Comments::where('idVideo',$id)->orderBy('created_at','DESC');
-        return view('videos.show',compact('videos','allVid','comments'));
+        $videos = Video::FindOrFail($id);
+        $allVid = Video::whereNotIn('id', [$id])->get();
+        $comments = Comments::where('idVideo', $id)
+            ->orderBy('created_at', 'DESC');
+        return view('videos.show', compact('videos', 'allVid', 'comments'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -69,40 +73,44 @@ class CommentController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int                      $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
 
-        if(Auth::user() == null){
+        if (Auth::user() == null)
+        {
             return redirect()->route('login');
         }
 
         $request->validate([
-            'comment'=>'required',
+            'comment' => 'required',
         ]);
         $user = Auth::user()->id;
 
-        Comments::create(['comment'=>$request->comment,
-                        'user'=>$user,
-                        'idVideo'=>$id
-            ]);
+        Comments::create([
+            'comment' => $request->comment,
+            'user'    => $user,
+            'idVideo' => $id
+        ]);
 
 
-            return redirect()->route("video.show",$id);
+        return redirect()->route("video.show", $id);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $com = Comments::where('id',$id);
+        $com = Comments::where('id', $id);
         $com->delete();
         return redirect()->back();
     }

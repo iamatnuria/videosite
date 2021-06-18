@@ -23,7 +23,7 @@
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#miModal">
             Cambiar contraseña
         </button>
-    <br/>
+        <br/>
     </div>
     <div class="modal fade" id="miModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -38,16 +38,16 @@
                     @method('PUT')
                     <input type="hidden" name="id" value="{{$user->id}}" class="form form-control">
                     Nueva Contraseña
-                    <br />
+                    <br/>
                     <input type="password" name="password" class="form form-control">
                     Confirmar Contraseña
-                    <br />
+                    <br/>
                     <input type="password" name="password_confirmation" class="form form-control">
-                    <br />
+                    <br/>
                     <input type="submit" class="btn btn-primary" value="Save">
                 </form>
             </div>
         </div>
     </div>
 
-    @endsection
+@endsection

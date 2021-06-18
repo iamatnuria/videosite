@@ -5,8 +5,8 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRolesTable extends Migration
-{
+class CreateRolesTable extends Migration {
+
     /**
      * Run the migrations.
      *
@@ -16,9 +16,8 @@ class CreateRolesTable extends Migration
     {
         Schema::create('roles', function (Blueprint $table) {
             $table->id();
-		    $table->string('rol', 55);
+            $table->string('rol', 55);
         });
-
 
 
         DB::table('roles')->insert(

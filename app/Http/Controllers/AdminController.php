@@ -7,12 +7,11 @@ use App\Models\Video;
 use App\Models\User;
 use App\Models\Comments;
 
-class AdminController extends Controller
-{
+class AdminController extends Controller {
 
     function __construct()
     {
-        $this->middleware(['auth','role:admin']);
+        $this->middleware(['auth', 'role:admin']);
     }
 
     /**
@@ -24,44 +23,49 @@ class AdminController extends Controller
     {
         $videos = Video::all();
         $users = User::all();
-        return view('videos.index',compact('videos','users'));
+        return view('videos.index', compact('videos', 'users'));
     }
+
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        $user=User::FindOrFail($id);
-        return view('user.edit',compact('user'));
+        $user = User::FindOrFail($id);
+        return view('user.edit', compact('user'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $videos=Video::FindOrFail($id);
-        return view('videos.edit',compact('videos'));
+        $videos = Video::FindOrFail($id);
+        return view('videos.edit', compact('videos'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int                      $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        $videos=Video::FindOrFail($id);
-        $videos->update(['title'=>$request->description,
-        'desc'=>$request->price
+        $videos = Video::FindOrFail($id);
+        $videos->update([
+            'title' => $request->description,
+            'desc'  => $request->price
         ]);
         $videos = Video::all();
 
@@ -72,15 +76,16 @@ class AdminController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $comments = Comments::where('idVideo',$id);
+        $comments = Comments::where('idVideo', $id);
         $comments->delete();
         $video = Video::FindOrFail($id);
         $video->delete();
-        return redirect()->route('all');
+        return redirect()->route('edit');
     }
 }

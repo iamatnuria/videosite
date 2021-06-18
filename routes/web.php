@@ -23,36 +23,38 @@ use App\Models\User;
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])
+    ->name('home');
 Route::get('/', [VideoController::class, 'allVideos'])->name('all');
 
 Route::group(['middleware' => 'auth'], function () {
 
     Route::resources([
-        'video'=>VideoController::class,
-        'comment'=>CommentController::class,
-        'vidAdmin'=>AdminController::class,
-        'user'=>UserController::class,
-        'us'=>User::class
+        'video'    => VideoController::class,
+        'comment'  => CommentController::class,
+        'vidAdmin' => AdminController::class,
+        'user'     => UserController::class,
+        'us'       => User::class
     ]);
-
 
 
     Route::get('/show', [VideoController::class, 'show'])->name('show');
 
 
-    Route::prefix('user')->group(function(){
-        Route::get('/profile', [UserController::class, 'show'])->name('profile');
+    Route::prefix('user')->group(function () {
+        Route::get('/profile', [UserController::class, 'show'])
+            ->name('profile');
 
     });
 
-    Route::prefix('editor')->group(function(){
-        Route::resource('vidEdit',EditorController::class);
-        Route::get('/new', [EditorController::class, 'newVideo'])->name('store');
+    Route::prefix('editor')->group(function () {
+        Route::resource('vidEdit', EditorController::class);
+        Route::get('/new', [EditorController::class, 'newVideo'])
+            ->name('store');
         Route::get('/edit', [EditorController::class, 'edit'])->name('editE');
     });
 
-    Route::prefix('admin')->group(function(){
+    Route::prefix('admin')->group(function () {
         Route::get('/edit', [AdminController::class, 'index'])->name('edit');
     });
 

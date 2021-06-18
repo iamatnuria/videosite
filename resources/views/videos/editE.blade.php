@@ -3,7 +3,7 @@
 @section('content')
     <div class="col-lg-12">
 
-        <h1 class="my-4">Property edit</h1>
+        <h1 class="my-4">{{ $videos->title }} edit</h1>
         <form action="{{route('vidEdit.update',$videos->id)}}" method="POST">
             @csrf
             @method('PUT')
@@ -20,7 +20,7 @@
             <br/>
             <br/>
         </form>
-    <br/>
+        <br/>
     </div>
 
-    @endsection
+@endsection

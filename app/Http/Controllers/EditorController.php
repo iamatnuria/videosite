@@ -8,13 +8,12 @@ use App\Models\Video;
 use App\Models\User;
 use App\Models\Comments;
 
-class EditorController extends Controller
-{
+class EditorController extends Controller {
 
 
     function __construct()
     {
-        $this->middleware(['auth'=>'role:editor']);
+        $this->middleware(['auth' => 'role:editor']);
     }
 
     /**
@@ -25,7 +24,7 @@ class EditorController extends Controller
     public function index()
     {
         $videos = Video::all();
-        return view('videos.index',compact('videos'));
+        return view('videos.index', compact('videos'));
     }
 
     public function newVideo()
@@ -36,72 +35,78 @@ class EditorController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
 
         $request->validate([
-            'title'=>'required|unique:videos',
-            'desc'=>'required',
-            'video'=>'required',
+            'title' => 'string|required|unique:videos|max:55',
+            'desc'  => 'string|required|max:255',
+            'video' => 'required|file|mimes:mp4,x-flv,x-mpegURL,MP2T,3gpp,qt,x-ms-wmv|max:85000'
         ]);
 
-        $pathV=$request->file('video')->store('videos','public');
+        $pathV = $request->file('video')->store('videos', 'public');
         $user = Auth::user()->id;
-        Video::create(['title'=>$request->title,
-                        'cont'=>$pathV,
-                        'desc'=>$request->desc,
-                        'user'=>$user,
-                        'visitas'=>0
-            ]);
-        $videos=Video::all();
+        Video::create([
+            'title'   => $request->title,
+            'cont'    => $pathV,
+            'desc'    => $request->desc,
+            'user'    => $user,
+            'visitas' => 0
+        ]);
+        $videos = Video::all();
         return redirect()->route('all');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        $videos=Video::FindOrFail($id);
-        return view('videos.show',compact('videos'));
+        $videos = Video::FindOrFail($id);
+        return view('videos.show', compact('videos'));
     }
 
     public function allVideos()
     {
-        $videos=Video::all();
-        return view('videos.all',compact('videos'));
+        $videos = Video::all();
+        return view('videos.all', compact('videos'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $videos=Video::FindOrFail($id);
-        return view('videos.editE',compact('videos'));
+        $videos = Video::FindOrFail($id);
+        return view('videos.editE', compact('videos'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int                      $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        $videos=Video::FindOrFail($id);
-        $videos->update(['title'=>$request->description,
-        'desc'=>$request->price
+        $videos = Video::FindOrFail($id);
+        $videos->update([
+            'title' => $request->description,
+            'desc'  => $request->price
         ]);
         $videos = Video::all();
 
@@ -112,12 +117,13 @@ class EditorController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $com = Comments::where('idVideo',$id);
+        $com = Comments::where('idVideo', $id);
         $com->delete();
         $video = Video::FindOrFail($id);
         $video->delete();
